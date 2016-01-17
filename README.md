@@ -13,7 +13,7 @@ composer.phar require diimpp/salesforce-rest-api
 
 ## Usage
 ```php
-$api = \Diimpp\Salesforce\Api::init($clientId, $clientSecret, $accessToken, $instanceUrl);
+$api = \Diimpp\Salesforce\Api::init($accessToken, $instanceUrl);
 // $api = \Diimpp\Salesforce\Api::initWithAuthentication($clientId, $clientSecret, $username, $password);
 
 $job = new Job($api);

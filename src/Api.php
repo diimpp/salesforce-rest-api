@@ -58,16 +58,14 @@ class Api
     }
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
      * @param string $accessToken
      * @param string $instanceUrl
      *
      * @return Api
      */
-    public static function init($clientId, $clientSecret, $accessToken, $instanceUrl)
+    public static function init($accessToken, $instanceUrl)
     {
-        $session = new Session($clientId, $clientSecret, $accessToken, $instanceUrl);
+        $session = new Session($accessToken, $instanceUrl);
         $api = new static(new Client(), $session);
         static::setInstance($api);
 
@@ -102,7 +100,7 @@ class Api
 
         if (200 == $response->getStatusCode()) {
             $data = json_decode($response->getBody()->getContents(), true);
-            $session = new Session($clientId, $clientSecret, $data['access_token'], $data['instance_url']);
+            $session = new Session($data['access_token'], $data['instance_url']);
 
             $session->setId($data['id']);
             $session->setIssuedAt($data['issued_at']);

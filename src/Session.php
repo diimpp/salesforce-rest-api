@@ -16,16 +16,6 @@ class Session
     /**
      * @var string
      */
-    protected $clientId;
-
-    /**
-     * @var string
-     */
-    protected $clientSecret;
-
-    /**
-     * @var string
-     */
     protected $id;
 
     /**
@@ -54,33 +44,13 @@ class Session
     protected $issuedAt;
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
      * @param string $accessToken
      * @param string $instanceUrl
      */
-    public function __construct($clientId, $clientSecret, $accessToken, $instanceUrl)
+    public function __construct($accessToken, $instanceUrl)
     {
-        $this->clientId = $clientId;
-        $this->clientSecret = $clientSecret;
         $this->accessToken = $accessToken;
         $this->instanceUrl = $instanceUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClientId()
-    {
-        return $this->clientId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClientSecret()
-    {
-        return $this->clientSecret;
     }
 
     /**
