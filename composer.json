@@ -1,0 +1,23 @@
+{
+    "name": "diimpp/salesforce-rest-api",
+    "type": "library",
+    "description": "Experimental Salesforce rest & bulk api",
+    "keywords": "salesforce, rest, bulk, api",
+    "homepage": "https://github.com/diimpp/salesforce-rest-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitri Perunov",
+            "email": "dmitri.perunov@gmail.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "Diimpp\\Salesforce\\": "src"
+      }
+    },
+    "require": {
+      "php": ">=5.3.0",
+      "guzzlehttp/guzzle": "~6"
+    }
+}
