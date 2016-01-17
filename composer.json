@@ -2,7 +2,7 @@
     "name": "diimpp/salesforce-rest-api",
     "type": "library",
     "description": "Experimental Salesforce rest & bulk api",
-    "keywords": "salesforce, rest, bulk, api",
+    "keywords": ["salesforce", "rest", "bulk", "api"],
     "homepage": "https://github.com/diimpp/salesforce-rest-api",
     "license": "MIT",
     "authors": [
