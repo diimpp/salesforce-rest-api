@@ -14,8 +14,10 @@ composer.phar require diimpp/salesforce-rest-api
 ## Usage
 ```php
 $api = \Diimpp\Salesforce\Api::init($accessToken, $instanceUrl);
+// or
 // $api = \Diimpp\Salesforce\Api::initWithAuthentication($clientId, $clientSecret, $username, $password);
 
+// Example usage of bulk api query.
 $job = new Job($api);
 $job->create([
     'operation' => Job::OPERATION_QUERY,

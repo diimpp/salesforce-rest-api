@@ -44,9 +44,10 @@ class JobBatch extends AbstractCrudObject
      *
      * @param array $params Additional parameters to include in the request
      *
-     * @return $this
+     * @return JobBatch
      *
      * @throws \LogicException
+     * @throws \RuntimeException
      */
     public function create(array $params = [])
     {
@@ -64,6 +65,12 @@ class JobBatch extends AbstractCrudObject
 
         $data = $this->xml2array($data);
         $this->setDataWithoutValidation($data);
+
+        try {
+            $this->assureId();
+        } catch (\Exception $e) {
+            throw new \RuntimeException(sprintf('Salesforce JobBatch creation request failed with reason: %s', printf($this->getData(), true)));
+        }
 
         return $this;
     }

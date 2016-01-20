@@ -47,9 +47,11 @@ XML;
      *
      * @param array $params Additional parameters to include in the request
      *
-     * @return $this
+     * @return Job
      *
      * @throws \LogicException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function create(array $params = [])
     {
@@ -97,6 +99,12 @@ XML;
         $data = $this->xml2array($data);
         $this->setDataWithoutValidation($data);
 
+        try {
+            $this->assureId();
+        } catch (\Exception $e) {
+            throw new \RuntimeException(sprintf('Salesforce Job creation request failed with reason: %s', printf($this->getData(), true)));
+        }
+
         return $this;
     }
 
@@ -105,9 +113,9 @@ XML;
      *
      * @param array $params Additional parameters to include in the request
      *
-     * @throws \LogicException
-     *
      * @return Job
+     *
+     * @throws \LogicException
      */
     public function close(array $params = [])
     {

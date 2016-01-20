@@ -34,6 +34,13 @@ class JobBatchResult extends AbstractCrudObject
         return 'result';
     }
 
+    /**
+     * Read method for the object.
+     *
+     * @param array $params Additional parameters to include in the request
+     *
+     * @return JobBatchResult
+     */
     public function read(array $params = [])
     {
         $response = $this->getApi()->call(
@@ -48,6 +55,13 @@ class JobBatchResult extends AbstractCrudObject
         return $this;
     }
 
+    /**
+     * Retrieve result data method for the object.
+     *
+     * @return string
+     *
+     * @throws \LogicException
+     */
     public function retrieveData()
     {
         if (!(isset($this->data['result']) && $this->data['result'])) {
