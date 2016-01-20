@@ -74,14 +74,14 @@ abstract class AbstractCrudObject extends AbstractObject
     }
 
     /**
-     * @throws \LogicException
-     *
      * @return string
+     *
+     * @throws \LogicException
      */
     protected function assureId()
     {
         if (!$this->data[static::FIELD_ID]) {
-            throw new \Exception('field "'.static::FIELD_ID.'" is required.');
+            throw new \Exception('Field "'.static::FIELD_ID.'" is required.');
         }
 
         return (string) $this->data[static::FIELD_ID];
@@ -96,6 +96,8 @@ abstract class AbstractCrudObject extends AbstractObject
     }
 
     /**
+     * @return string
+     *
      * @throws \InvalidArgumentException
      */
     protected function assureEndpoint()

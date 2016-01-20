@@ -114,21 +114,15 @@ XML;
      * @param array $params Additional parameters to include in the request
      *
      * @return Job
-     *
-     * @throws \LogicException
      */
     public function close(array $params = [])
     {
-        if (!(isset($this->data[static::FIELD_ID]) && $this->data[static::FIELD_ID])) {
-            throw new \LogicException('Object is not created');
-        }
-
         $message = new \SimpleXMLElement($this->messageTemplate);
         $message->state = 'Closed';
         $params['body'] = $message->asXML();
 
         $response = $this->getApi()->call(
-            $this->getEndpoint().'/'.$this->data[self::FIELD_ID],
+            $this->getNodePath(),
             'POST',
             $params
         );
