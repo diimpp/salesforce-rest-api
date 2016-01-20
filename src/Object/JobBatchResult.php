@@ -44,7 +44,7 @@ class JobBatchResult extends AbstractCrudObject
     public function read(array $params = [])
     {
         $response = $this->getApi()->call(
-            $this->jobBatch->getJob()->getEndpoint().'/'.$this->jobBatch->getJob()->id.'/'.$this->jobBatch->getEndpoint().'/'.$this->jobBatch->assureId().'/'.$this->getEndpoint(),
+            $this->jobBatch->getJob()->getEndpoint().'/'.$this->jobBatch->getJob()->id.'/'.$this->jobBatch->getEndpoint().'/'.$this->jobBatch->id.'/'.$this->getEndpoint(),
             'GET'
         );
         $data = is_string($response) ? new \SimpleXMLElement($response) : $response;
@@ -71,7 +71,7 @@ class JobBatchResult extends AbstractCrudObject
         if (!empty($this->result)) {
             if (is_string($this->result)) {
                 $response = $this->getApi()->call(
-                    $this->jobBatch->getJob()->getEndpoint().'/'.$this->jobBatch->getJob()->id.'/'.$this->jobBatch->getEndpoint().'/'.$this->jobBatch->assureId().'/'.$this->getEndpoint().'/'.$this->result,
+                    $this->jobBatch->getJob()->getEndpoint().'/'.$this->jobBatch->getJob()->id.'/'.$this->jobBatch->getEndpoint().'/'.$this->jobBatch->id.'/'.$this->getEndpoint().'/'.$this->result,
                     'GET'
                 );
 
@@ -79,7 +79,7 @@ class JobBatchResult extends AbstractCrudObject
             } elseif (is_array($this->result)) {
                 foreach ($this->result as $resultId) {
                     $response = $this->getApi()->call(
-                        $this->jobBatch->getJob()->getEndpoint().'/'.$this->jobBatch->getJob()->id.'/'.$this->jobBatch->getEndpoint().'/'.$this->jobBatch->assureId().'/'.$this->getEndpoint().'/'.$resultId,
+                        $this->jobBatch->getJob()->getEndpoint().'/'.$this->jobBatch->getJob()->id.'/'.$this->jobBatch->getEndpoint().'/'.$this->jobBatch->id.'/'.$this->getEndpoint().'/'.$resultId,
                         'GET'
                     );
                 }
