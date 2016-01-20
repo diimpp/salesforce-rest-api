@@ -15,6 +15,12 @@ use Diimpp\Salesforce\Api;
 
 class JobBatch extends AbstractCrudObject
 {
+    const STATE_QUEUED          = 'Queued';
+    const STATE_IN_PROGRESS     = 'InProgress';
+    const STATE_COMPLETED       = 'Completed';
+    const STATE_FAILED          = 'Failed';
+    const STATE_NOT_PROCESSED   = 'Not Processed';
+
     /**
      * @var Job
      */
@@ -71,6 +77,28 @@ class JobBatch extends AbstractCrudObject
         } catch (\Exception $e) {
             throw new \RuntimeException(sprintf('Salesforce JobBatch creation request failed with reason: %s', printf($this->getData(), true)));
         }
+
+        return $this;
+    }
+
+    /**
+     * Read object data from the api.
+     *
+     * @param array $params Additional request parameters
+     *
+     * @return JobBatch
+     */
+    public function read(array $params = [])
+    {
+        $response = $this->getApi()->call(
+            $this->job->getEndpoint().'/'.$this->job->id.'/'.$this->getEndpoint().'/'.$this->assureId(),
+            'GET',
+            $params);
+
+        $data = is_string($response) ? new \SimpleXMLElement($response) : $response;
+
+        $data = $this->xml2array($data);
+        $this->setDataWithoutValidation($data);
 
         return $this;
     }
