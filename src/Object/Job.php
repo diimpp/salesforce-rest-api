@@ -102,7 +102,7 @@ XML;
         try {
             $this->assureId();
         } catch (\Exception $e) {
-            throw new \RuntimeException(sprintf('Salesforce Job creation request failed with reason: %s', printf($this->getData(), true)));
+            throw new \RuntimeException(sprintf('Salesforce Job creation request failed with reason: %s', print_r($this->getData(), true)));
         }
 
         return $this;
