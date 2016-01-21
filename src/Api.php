@@ -153,26 +153,6 @@ class Api
     }
 
     /**
-     * @return string
-     */
-    public function getAuthenticationDomain()
-    {
-        return $this->authenticationDomain;
-    }
-
-    /**
-     * @param string $domain
-     *
-     * @return Api
-     */
-    public function setAuthenticationDomain($domain)
-    {
-        $this->authenticationDomain = $domain;
-
-        return $this;
-    }
-
-    /**
      * Make Salesforce REST api calls.
      *
      * @param string $path   API endpoint
