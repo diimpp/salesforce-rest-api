@@ -29,10 +29,20 @@ $soql = 'select id, lastname, firstname, salutation, name from Contact';
 
 $jobBatch = new JobBatch($job, $api);
 $jobBatch->create(['body' => $soql]);
+$job->close();
+
+// Wait till job batch will be completed.
+while (JobBatch::STATE_QUEUED === $jobBatch->state || JobBatch::STATE_IN_PROGRESS === $jobBatch->state) {
+    $jobBatch->read();
+}
+if (JobBatch::STATE_COMPLETED !== $jobBatch->state) {
+    throw new \RuntimeException(sprintf('Salesforce Job Batch request failed with reason: %s', print_r($jobBatch->getData(), true)));
+}
+
 $jobBatchResult = new JobBatchResult($jobBatch);
 $jobBatchResult->read();
 
-// Salesforce API returns either ID or array of IDs of batch results.
+// Salesforce API returns either ID as string or array of IDs of batch results.
 if (is_string($jobBatchResult->result)) {
     $data = $jobBatchResult->retrieveData($jobBatchResult->result));
 } elseif (is_array($jobBatchResult->result)) {
@@ -40,7 +50,6 @@ if (is_string($jobBatchResult->result)) {
         $data[] = $jobBatchResult->retrieveData($resultId));
     }
 }
-$job->close();
 ```
 
 ## Contributions
